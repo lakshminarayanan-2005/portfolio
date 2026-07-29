@@ -2,6 +2,7 @@
 
 A dark-mode, recruiter-focused portfolio built with Next.js (App Router), TypeScript, Tailwind CSS, and Framer Motion. Designed for a Computer Science student applying to internships and entry-level frontend/full-stack roles.
 
+PORTFOLIO LINK : https://lakshminarayanan-2005.github.io/portfolio
 ## Design system
 
 | Token | Value | Use |
