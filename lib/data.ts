@@ -5,24 +5,24 @@
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
-  name: "M Lakshminarayanan",
+  name: "[Your Name]",
   title: "Computer Science Student | Aspiring Full Stack Web Developer",
   tagline:
     "I build modern, responsive web applications and enjoy turning real problems into clean, working code.",
   intro:
     "I'm a Computer Science student passionate about building modern, responsive, and user-friendly web applications. I enjoy solving real-world problems with clean code, and I'm continuously improving my skills across the frontend and backend.",
-  location: "Chennai,India",
-  email: "lakshmln.official@gmail.com",
-  github: "https://github.com/lakshminarayanan-2005",
-  linkedin: "https://www.linkedin.com/in/m-lakshminarayanan-63807102mln?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-  resumeUrl: "/Lakshminarayanan.pdf",
+  location: "[City, Country]",
+  email: "[your.email@example.com]",
+  github: "https://github.com/[your-username]",
+  linkedin: "https://linkedin.com/in/[your-username]",
+  resumeUrl: "/resume.pdf",
   availability: "Open to Internships & Entry-Level Roles",
 };
 
 export const education = {
-  degree: "B.E in Computer Science",
-  institution: "Karpaga Vinayaga College of Engineering and Technology",
-  graduationYear: "2028",
+  degree: "[B.Tech / B.Sc. in Computer Science]",
+  institution: "[Your College / University Name]",
+  graduationYear: "[2026]",
   coursework: [
     "Data Structures & Algorithms",
     "Database Management Systems",

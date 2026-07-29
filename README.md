@@ -75,49 +75,66 @@ Then:
 
 ## 3. Making the contact form actually send email
 
-Right now `app/api/contact/route.ts` just logs the submission to the server console — it won't email you yet. Pick one:
+This project is set up as a **static export** (see below) so it can run on GitHub Pages, which has no server to send email from. The form posts to [Formspree](https://formspree.io) instead:
 
-- **Resend** (recommended, generous free tier): `npm install resend`, get an API key from resend.com, uncomment the example code in `route.ts`, and add `RESEND_API_KEY` to your environment variables.
-- **Formspree**: skip the API route and point the form's `action` at your Formspree endpoint instead.
-- **EmailJS**: send directly from the client if you'd rather not use a server route.
+1. Go to formspree.io, sign up free, and create a new form.
+2. Copy the form ID it gives you.
+3. In `components/Contact.tsx`, replace `[your-form-id]` in the `FORMSPREE_ENDPOINT` constant with it.
 
 ## 4. Before you publish — a quick checklist
 
 - [ ] Every `[bracketed placeholder]` in `lib/data.ts` replaced with real content
+- [ ] `REPO_NAME` in `next.config.js` set to your actual GitHub repo name
+- [ ] Formspree form ID added in `components/Contact.tsx`
 - [ ] Real resume in `public/resume.pdf`
 - [ ] Real project screenshots in `public/projects/`
-- [ ] Contact form wired to an actual email provider
 - [ ] Real domain swapped into `layout.tsx` / `robots.ts` / `sitemap.ts`
 - [ ] Run `npm run build` locally with no errors
 
-## 5. Deploying to Vercel (step by step)
+## 5. Publishing to GitHub Pages (step by step)
 
-**Option A — with GitHub (recommended):**
+This is the same hosting model as `harish-4007.github.io/f1-aiml-analysis` — a static site served straight from your GitHub repo at `https://<your-username>.github.io/<repo-name>/`.
 
-1. Create a new repository on GitHub.
-2. From inside the `portfolio` folder:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo>.git
-   git push -u origin main
-   ```
-3. Go to [vercel.com](https://vercel.com) and sign in with GitHub.
-4. Click **Add New → Project**, select your repository, and click **Import**.
-5. Vercel auto-detects Next.js — leave the default build settings (`next build`) as they are.
-6. If you're using Resend or another email provider, add the API key under **Environment Variables** before deploying.
-7. Click **Deploy**. Your site will be live at `https://<your-project-name>.vercel.app` within a minute or two.
-8. (Optional) Go to **Project → Settings → Domains** to connect a custom domain.
+**1. Set your repo name in the code**
 
-**Option B — without GitHub, using the Vercel CLI:**
+Open `next.config.js` and set `REPO_NAME` to whatever you'll name the GitHub repository (e.g. `"portfolio"`).
+
+**2. Create the GitHub repo and push your code**
+
+```bash
+cd portfolio
+git init
+git add .
+git commit -m "Initial portfolio"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<repo-name>.git
+git push -u origin main
+```
+
+**3. Turn on GitHub Pages**
+
+- On GitHub, go to your repo → **Settings → Pages**.
+- Under **Build and deployment → Source**, choose **GitHub Actions**.
+
+A workflow file is already included at `.github/workflows/deploy.yml`. It runs automatically on every push to `main`: installs dependencies, builds a static export (`next build` with `output: "export"`), and publishes the `out/` folder to Pages.
+
+**4. Watch it deploy**
+
+- Go to the **Actions** tab in your repo — you'll see "Deploy to GitHub Pages" running.
+- Once it finishes (usually under 2 minutes), your site is live at:
+  ```
+  https://<your-username>.github.io/<repo-name>/
+  ```
+- Every future `git push` to `main` redeploys automatically.
+
+**Alternative: deploying to Vercel instead**
+
+If you'd rather have a cleaner URL and a working server-side contact form, this same codebase also works on Vercel — just remove `output: "export"` from `next.config.js` first, then either connect the repo at [vercel.com](https://vercel.com) → **Add New → Project**, or run:
 
 ```bash
 npm install -g vercel
-cd portfolio
-vercel        # follow the prompts to deploy a preview
-vercel --prod # promote to your production URL
+vercel        # preview deploy
+vercel --prod # production deploy
 ```
 
 ## 6. Performance & accessibility notes

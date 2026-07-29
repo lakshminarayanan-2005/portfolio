@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Github, Linkedin, Mail, FileDown, FolderGit2 } from "lucide-react";
 import { profile } from "@/lib/data";
+import { withBasePath } from "@/lib/basePath";
 
 const LINES = [
   { prompt: "whoami", output: profile.name },
@@ -121,7 +122,7 @@ export default function Hero() {
               <FolderGit2 size={16} /> View Projects
             </a>
             <a
-              href={profile.resumeUrl}
+              href={withBasePath(profile.resumeUrl)}
               className="inline-flex items-center gap-2 rounded-full border border-base-700 px-5 py-2.5 text-sm font-medium text-ink-100 hover:border-ink-300 transition-colors"
             >
               <FileDown size={16} /> Download Resume

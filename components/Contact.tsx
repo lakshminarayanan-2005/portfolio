@@ -4,7 +4,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, FileDown, CheckCircle2 } from "lucide-react";
 import { profile } from "@/lib/data";
+import { withBasePath } from "@/lib/basePath";
 import SectionHeading from "./SectionHeading";
+
+// This is a static site (GitHub Pages), so there's no server to send email from.
+// Sign up free at https://formspree.io, create a form, and paste your form ID here.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/[your-form-id]";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -14,10 +19,10 @@ export default function Contact() {
     setStatus("sending");
     const form = new FormData(e.currentTarget);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(form)),
+        headers: { Accept: "application/json" },
+        body: form,
       });
       setStatus(res.ok ? "sent" : "error");
     } catch {
@@ -61,7 +66,7 @@ export default function Contact() {
               <Linkedin size={18} className="text-signal" /> LinkedIn profile
             </a>
             <a
-              href={profile.resumeUrl}
+              href={withBasePath(profile.resumeUrl)}
               className="flex items-center gap-3 text-ink-300 hover:text-ink-100 transition-colors text-sm"
             >
               <FileDown size={18} className="text-signal" /> Download resume

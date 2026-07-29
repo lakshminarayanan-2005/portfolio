@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { nav, profile } from "@/lib/data";
+import { withBasePath } from "@/lib/basePath";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +39,7 @@ export default function Navbar() {
         </ul>
 
         <a
-          href={profile.resumeUrl}
+          href={withBasePath(profile.resumeUrl)}
           className="hidden md:inline-flex items-center rounded-full border border-base-700 px-4 py-2 text-sm font-medium text-ink-100 hover:border-signal hover:text-signal transition-colors"
         >
           Resume
@@ -65,7 +66,7 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <a href={profile.resumeUrl} className="text-signal">
+              <a href={withBasePath(profile.resumeUrl)} className="text-signal">
                 Resume
               </a>
             </li>
