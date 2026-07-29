@@ -15,10 +15,9 @@ export const profile = {
   email: "lakshmln.official@gmail.com",
   github: "https://github.com/lakshminarayanan-2005",
   linkedin: "https://www.linkedin.com/in/m-lakshminarayanan-6380712902mln/",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/Lakshminarayanan.pdf",
   availability: "Open to Internships & Entry-Level Roles",
 };
-
 export const education = {
   degree: "B.E in Computer Science",
   institution: "Karpaga Vinayaga College of Engineering and Technology",
